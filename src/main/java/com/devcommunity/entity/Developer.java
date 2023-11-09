@@ -1,11 +1,18 @@
 package com.devcommunity.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,10 +22,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","listOfPosts"})
 public class Developer extends User{
-
-//	@Column(name = "id")
-//	private Integer id;
 	
 	@Column(name = "name")
 	private String devName;
@@ -26,7 +31,7 @@ public class Developer extends User{
 	@Column(name = "skills")
 	private String devSkill;
 	
-	@Column(name = "since")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate memberSince;
 	
 	@Column(name = "reputation")
@@ -35,7 +40,8 @@ public class Developer extends User{
 	@Column(name = "status")
 	private String status;
 
-
+	@OneToMany(mappedBy = "developer")
+	private List<Post> listOfPosts;
 	
 	
 	
