@@ -1,7 +1,5 @@
 package com.devcommunity.service;
 
-import java.util.ArrayList;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,20 +9,14 @@ import org.springframework.stereotype.Service;
 import com.devcommunity.entity.Developer;
 import com.devcommunity.entity.Post;
 import com.devcommunity.repository.DeveloperRepository;
-import com.devcommunity.repository.PostRepository;
-import com.devcommunity.repository.UserRepository;
+
 
 @Service
 public class DeveloperService {
-	
-	@Autowired
-	UserRepository userrepo;
 
 	@Autowired
 	DeveloperRepository repository;
 	
-	@Autowired
-	PostRepository postrepo;
 	
 	public Developer addDeveloper(Developer d) {
 		repository.save(d);
@@ -40,15 +32,6 @@ public class DeveloperService {
 	
 	public List<Developer> getAll(){
 		List<Developer> list =  repository.findAll();
-//		for(Developer d:list) {
-//			List<Post> listOfPosts = new ArrayList<>();
-//			for(Post p: postrepo.findAll()) {
-//				if(p.getDeveloper().getUserId() == d.getUserId()) {
-//					listOfPosts.add(p);
-//				}
-//			}
-//			d.setListOfPosts(listOfPosts);
-//		}
 		return list;
 	}
 	
@@ -75,5 +58,16 @@ public class DeveloperService {
         		.max((a,b) -> a.getReputation() - b.getReputation())
         		.get();
     }
+	
+	public List<Post> getPostsByDeveloper(Integer devId){
+		return repository.findById(devId).get()
+				.getListOfPosts();
+	}
+	
+	public List<Developer> getByNoOfPosts(Integer noOfPosts){
+		return repository.findAll().stream()
+				.filter(e -> e.getListOfPosts().size() == noOfPosts)
+				.collect(Collectors.toList());
+	}
 	
 }

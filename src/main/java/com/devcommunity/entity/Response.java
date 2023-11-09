@@ -1,7 +1,6 @@
 package com.devcommunity.entity;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,12 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,32 +23,26 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "posts")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","listOfResponse"})
-public class Post {
+@Table(name = "responses")
+public class Response {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private Integer postId;
+	private Integer respId;
 	
-	@Column(name = "query")
-	private String query;
+	@Column(name = "answer")
+	private String answer;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate postDateTime;
-	
-	@Column(name = "topic")
-	private String topic;
+	private LocalDate respDateTime;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "developer_id")
+	@JoinColumn(name = "post_id")
+	private Post post;
+	
+	@OneToOne
 	private Developer developer;
 	
-	@Column(name = "views")
-	private Integer noOfViews;
 	
-	@OneToMany(mappedBy = "post")
-	private List<Response> listOfResponse;
 	
 }

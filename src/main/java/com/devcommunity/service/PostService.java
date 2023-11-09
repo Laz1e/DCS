@@ -7,16 +7,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.devcommunity.entity.Developer;
 import com.devcommunity.entity.Post;
-import com.devcommunity.repository.DeveloperRepository;
 import com.devcommunity.repository.PostRepository;
 
 @Service
 public class PostService {
-	
-	@Autowired
-	DeveloperRepository devrepo;
 	
 	@Autowired
 	PostRepository repository;
@@ -37,7 +32,7 @@ public class PostService {
 	
 	public Post getPostById(Integer postId) {
 		Post p = repository.findById(postId).get();
-		Integer devId = p.getDeveloper().getUserId();
+//		Integer devId = p.getDeveloper().getUserId();
 //		System.out.println(devId);
 		return p;
 	}
