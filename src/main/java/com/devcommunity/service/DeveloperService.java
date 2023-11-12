@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.devcommunity.dto.DeveloperDTO;
+import com.devcommunity.dto.PostDTO;
 import com.devcommunity.entity.Developer;
-import com.devcommunity.entity.Post;
 import com.devcommunity.repository.DeveloperRepository;
 
 
@@ -65,16 +65,18 @@ public class DeveloperService {
         		.get();
     }
 	
-//	public List<Post> getPostsByDeveloper(Integer devId){
-//		return repository.findById(devId).get()
-//				.getListOfPosts();
-//	}
+	public List<PostDTO> getPostsByDeveloper(Integer devId){
+		return repository.findById(devId).get()
+				.getListOfPosts().stream()
+				.map(e -> mapper.map(e, PostDTO.class))
+				.collect(Collectors.toList());
+	}
 	
-//	public List<DeveloperDTO> getByNoOfPosts(Integer noOfPosts){
-//		return repository.findAll().stream()
-//				.filter(e -> e.getListOfPosts().size() == noOfPosts)
-//				.map(e -> mapper.map(e, DeveloperDTO.class))
-//				.collect(Collectors.toList());
-//	}
+	public List<DeveloperDTO> getByNoOfPosts(Integer noOfPosts){
+		return repository.findAll().stream()
+				.filter(e -> e.getListOfPosts().size() == noOfPosts)
+				.map(e -> mapper.map(e, DeveloperDTO.class))
+				.collect(Collectors.toList());
+	}
 	
 }

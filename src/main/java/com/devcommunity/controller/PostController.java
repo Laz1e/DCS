@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.devcommunity.entity.Post;
+import com.devcommunity.dto.PostDTO;
 import com.devcommunity.entity.PostVote;
 import com.devcommunity.service.PostService;
 
@@ -27,49 +27,49 @@ public class PostController {
 	
 //	Working
 	@PostMapping("/")
-	public Post addPost(@RequestBody Post p) {
+	public PostDTO addPost(@RequestBody PostDTO p) {
 		return service.addPost(p);
 	}
 	
 //	Working
 	@PutMapping("/")
-	public Post updatePost(@RequestBody Post p) {
+	public PostDTO updatePost(@RequestBody PostDTO p) {
 		return service.updatePost(p);
 	}
 	
 //	Working
 	@GetMapping("/")
-	public List<Post> getAll(){
+	public List<PostDTO> getAll(){
 		return service.getAll();
 	}
 	
 //	Working
 	@GetMapping("/id")
-	public Post getById(@RequestParam("id") Integer postId) {
+	public PostDTO getById(@RequestParam("id") Integer postId) {
 		return service.getPostById(postId);
 	}
 	
 //	Working
 	@DeleteMapping("/id")
-	public Post removeById(@RequestParam("id") Integer postId) {
+	public PostDTO removeById(@RequestParam("id") Integer postId) {
 		return service.removePost(postId);
 	}
 	
 //	Working
 	@GetMapping("/keyword")
-	public List<Post> getByKeyword(@RequestParam("key") String keyword) {
+	public List<PostDTO> getByKeyword(@RequestParam("key") String keyword) {
 		return service.getPostByKeyword(keyword);
 	}
 	
 //	Working
 	@GetMapping("/topic")
-	public List<Post> getByTopic(@RequestParam("topic") String topic){
+	public List<PostDTO> getByTopic(@RequestParam("topic") String topic){
 		return service.getPostByTopic(topic);
 	}
 	
 //	Working
 	@GetMapping("/date")
-	public List<Post> getByDate(@RequestParam("date") String date){
+	public List<PostDTO> getByDate(@RequestParam("date") String date){
 		return service.getPostByDate(LocalDate.parse(date));
 	}
 	

@@ -4,9 +4,11 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.devcommunity.dto.PostDTO;
 import com.devcommunity.entity.Post;
 import com.devcommunity.entity.PostVote;
 //import com.devcommunity.entity.Vote;
@@ -18,48 +20,52 @@ public class PostService {
 	@Autowired
 	PostRepository repository;
 	
-	public Post addPost(Post p) {
-		repository.save(p);	
+	ModelMapper mapper = new ModelMapper();
+	
+	public PostDTO addPost(PostDTO p) {
+		repository.save(mapper.map(p, Post.class));	
 		return p;
 	}
 	
-	public Post updatePost(Post p) {
-		repository.save(p);
+	public PostDTO updatePost(PostDTO p) {
+		repository.save(mapper.map(p, Post.class));	
 		return p;
 	}
 	
-	public List<Post> getAll(){
-		return repository.findAll();
+	public List<PostDTO> getAll(){
+		return repository.findAll().stream()
+				.map(e -> mapper.map(e, PostDTO.class))
+				.collect(Collectors.toList());
 	}
 	
-	public Post getPostById(Integer postId) {
-		Post p = repository.findById(postId).get();
-//		Integer devId = p.getDeveloper().getUserId();
-//		System.out.println(devId);
-		return p;
+	public PostDTO getPostById(Integer postId) {
+		return mapper.map(repository.findById(postId).get(),PostDTO.class);
 	}
 	
-	public Post removePost(Integer postId) {
+	public PostDTO removePost(Integer postId) {
 		Post p = repository.findById(postId).get();
 		repository.delete(p);
-		return p;
+		return mapper.map(p, PostDTO.class);
 	}
 	
-	public List<Post> getPostByKeyword(String keyword){
+	public List<PostDTO> getPostByKeyword(String keyword){
 		return repository.findAll().stream()
 				.filter(e -> e.getQuery().contains(keyword))
+				.map(e -> mapper.map(e, PostDTO.class))
 				.collect(Collectors.toList());
 	}
 	
-	public List<Post> getPostByTopic(String topic){
+	public List<PostDTO> getPostByTopic(String topic){
 		return repository.findAll().stream()
 				.filter(e -> e.getTopic().equals(topic))
+				.map(e -> mapper.map(e, PostDTO.class))
 				.collect(Collectors.toList());
 	}
 	
-	public List<Post> getPostByDate(LocalDate date){
+	public List<PostDTO> getPostByDate(LocalDate date){
 		return repository.findAll().stream()
 				.filter(e -> e.getPostDateTime().equals(date))
+				.map(e -> mapper.map(e, PostDTO.class))
 				.collect(Collectors.toList());
 	}
 	
