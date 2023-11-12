@@ -9,7 +9,14 @@ import javax.persistence.Table;
 
 import com.devcommunity.util.VoteType;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "responsevote")
 public class ResponseVote {
 
