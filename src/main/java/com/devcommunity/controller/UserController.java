@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.devcommunity.entity.User;
+import com.devcommunity.dto.UserDTO;
 import com.devcommunity.service.UserService;
 
 @RestController
@@ -18,7 +18,7 @@ public class UserController {
 	UserService service;
 	
 	@PostMapping("/")
-	public User register(@RequestBody User u) {
+	public UserDTO register(@RequestBody UserDTO u) {
 		return service.register(u);		
 	}
 	

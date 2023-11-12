@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.devcommunity.dto.DeveloperDTO;
 import com.devcommunity.entity.Developer;
 import com.devcommunity.entity.Post;
 import com.devcommunity.service.DeveloperService;
@@ -24,44 +25,44 @@ public class DeveloperController {
 	
 //	Working
 	@PostMapping("/")
-	public Developer addDev(@RequestBody Developer d) {
+	public DeveloperDTO addDev(@RequestBody DeveloperDTO d) {
 		return service.addDeveloper(d);
 	}
 	
 //	Working
 	@PutMapping("/")
-	public Developer updateDev(@RequestBody Developer d) {
-		System.out.println(d);
+	public DeveloperDTO updateDev(@RequestBody DeveloperDTO d) {
+//		System.out.println(d);
 		return service.updateDeveloper(d);
 	}
 	
 //	Working
 	@GetMapping("/")
-	public List<Developer> getAll(){
+	public List<DeveloperDTO> getAll(){
 		return service.getAll();
 	}
 	
 //	Working
 	@GetMapping("/status")
-	public List<Developer> getByStatus(@RequestParam("status") String status){
+	public List<DeveloperDTO> getByStatus(@RequestParam("status") String status){
 		return service.getDeveloperByStatus(status);
 	}
 	
 //	Working
 	@GetMapping("/id")
-	public Developer getById(@RequestParam("id") Integer devId) {
+	public DeveloperDTO getById(@RequestParam("id") Integer devId) {
 		return service.getDeveloperById(devId);
 	}
 	
 //	Working
 	@GetMapping("/rep")
-	public List<Developer> getByReputation(@RequestParam("rep") Integer reputation){
+	public List<DeveloperDTO> getByReputation(@RequestParam("rep") Integer reputation){
 		return service.getDeveloperByReputation(reputation);
 	}
 	
 //	Working
 	@GetMapping("/max")
-	public Developer getByMaxReputation() {
+	public DeveloperDTO getByMaxReputation() {
 		return service.getByMaxReputation();
 	}
 	
@@ -74,15 +75,17 @@ public class DeveloperController {
 	 * 
 	 */
 	
-	@GetMapping("/posts")
-	public List<Post> getPostsByDeveloper(@RequestParam("id") Integer devId){
-		return service.getPostsByDeveloper(devId);
-	}
-	
-//	Working
-	@GetMapping("/total")
-	public List<Developer> getByNoOfPosts(@RequestParam("posts") Integer noOfPosts){
-		return service.getByNoOfPosts(noOfPosts);
-	}
+	/*
+	 * // @GetMapping("/posts") // public List<Post>
+	 * getPostsByDeveloper(@RequestParam("id") Integer devId){ // return
+	 * service.getPostsByDeveloper(devId); // }
+	 */	
+	/*
+	 * // Working
+	 * 
+	 * @GetMapping("/total") public List<Developer>
+	 * getByNoOfPosts(@RequestParam("posts") Integer noOfPosts){ return
+	 * service.getByNoOfPosts(noOfPosts); }
+	 */
 	
 }

@@ -1,8 +1,10 @@
 package com.devcommunity.service;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.devcommunity.dto.UserDTO;
 import com.devcommunity.entity.User;
 import com.devcommunity.repository.UserRepository;
 
@@ -12,12 +14,14 @@ public class UserService {
 	@Autowired
 	UserRepository repository;
 	
-	public User register(User u) {
-		repository.save(u);
+	ModelMapper mapper = new ModelMapper();
+	
+	public UserDTO register(UserDTO u) {
+		repository.save(mapper.map(u, User.class));
 		return u;
 	}
 	
-	public User signIn(String userName, String password) {
+	public UserDTO signIn(String userName, String password) {
 		return null;
 	}
 
