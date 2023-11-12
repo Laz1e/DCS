@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devcommunity.dto.DeveloperDTO;
-import com.devcommunity.entity.Developer;
-import com.devcommunity.entity.Post;
 import com.devcommunity.service.DeveloperService;
 
 @RestController

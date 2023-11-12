@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.devcommunity.entity.ResponseVote;
+import com.devcommunity.dto.ResponseVoteDTO;
 import com.devcommunity.service.ResponseVoteService;
 
 @RestController
@@ -17,7 +17,7 @@ public class ResponseVoteController {
 	ResponseVoteService service;
 	
 	@PostMapping("/")
-	public ResponseVote addVote(@RequestBody ResponseVote vote) {
+	public ResponseVoteDTO addVote(@RequestBody ResponseVoteDTO vote) {
 		return service.addVoteToResponse(vote);
 	}
 	

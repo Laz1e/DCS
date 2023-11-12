@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.devcommunity.entity.Response;
+import com.devcommunity.dto.ResponseDTO;
 import com.devcommunity.service.ResponseService;
 
 @RestController
@@ -24,13 +24,13 @@ public class ResponseController {
 	
 //	Working
 	@PostMapping("/")
-	public Response addResponse(@RequestBody Response r) {
+	public ResponseDTO addResponse(@RequestBody ResponseDTO r) {
 		return service.addResponse(r);
 	}
 	
 //	Working
 	@PutMapping("/")
-	public Response updateResponse(@RequestBody Response r) {
+	public ResponseDTO updateResponse(@RequestBody ResponseDTO r) {
 		return service.updateResponse(r);
 	}
 	
@@ -56,7 +56,7 @@ public class ResponseController {
 	 */
 	
 	@DeleteMapping("/id")
-	public Response removeResponse(@RequestParam("id") Integer respId) {
+	public ResponseDTO removeResponse(@RequestParam("id") Integer respId) {
 		return service.removeResponse(respId);
 	}
 	
@@ -76,7 +76,7 @@ public class ResponseController {
 	 */
 	
 	@GetMapping("/post")
-	public List<Response> getResponseByPost(@RequestParam("id") Integer postId){
+	public List<ResponseDTO> getResponseByPost(@RequestParam("id") Integer postId){
 		return service.getResponseByPost(postId);
 	}
 
@@ -86,7 +86,7 @@ public class ResponseController {
 	 * @JsonIgnoreProperties({"hibernateLazyInitializer","handler","listOfResponse"})
 	 */	
 	@GetMapping("/dev")
-	public List<Response> getResponseByDeveloper(@RequestParam("id") Integer devId){
+	public List<ResponseDTO> getResponseByDeveloper(@RequestParam("id") Integer devId){
 		return service.getResponseByDeveloper(devId);
 	}
 	
