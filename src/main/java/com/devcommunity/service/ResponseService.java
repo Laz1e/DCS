@@ -43,4 +43,8 @@ public class ResponseService {
 				.collect(Collectors.toList());
 	}
 	
+	public Integer getNoOfVotesOnResponseByVoteType(String  voteType, Integer resId) {
+		return (int)repository.findById(resId).get().getVote().stream().count();
+	}
+	
 }

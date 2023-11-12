@@ -91,4 +91,9 @@ public class ResponseController {
 	}
 	
 	
+	@GetMapping("/vote")
+	public Integer getCountOfVotesByType(@RequestParam("type") String voteType,@RequestParam("id") Integer resId) {
+		return service.getNoOfVotesOnResponseByVoteType(voteType, resId);
+	}
+	
 }

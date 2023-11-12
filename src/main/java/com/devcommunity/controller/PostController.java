@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devcommunity.entity.Post;
+import com.devcommunity.entity.PostVote;
 import com.devcommunity.service.PostService;
 
 
@@ -70,6 +71,11 @@ public class PostController {
 	@GetMapping("/date")
 	public List<Post> getByDate(@RequestParam("date") String date){
 		return service.getPostByDate(LocalDate.parse(date));
+	}
+	
+	@GetMapping("/vote")
+	public List<PostVote> getVotesOnPost(@RequestParam("id") Integer postId){
+		return service.getVotesOnPostWithId(postId);
 	}
 	
 }

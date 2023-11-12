@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.devcommunity.entity.Post;
+import com.devcommunity.entity.PostVote;
+//import com.devcommunity.entity.Vote;
 import com.devcommunity.repository.PostRepository;
 
 @Service
@@ -59,6 +61,10 @@ public class PostService {
 		return repository.findAll().stream()
 				.filter(e -> e.getPostDateTime().equals(date))
 				.collect(Collectors.toList());
+	}
+	
+	public List<PostVote> getVotesOnPostWithId(Integer postId){
+		return repository.findById(postId).get().getVote();
 	}
 
 }

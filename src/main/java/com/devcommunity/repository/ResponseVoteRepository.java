@@ -1,12 +1,10 @@
 package com.devcommunity.repository;
 
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.devcommunity.entity.Post;
-
+import com.devcommunity.entity.ResponseVote;
 @Repository
-public interface PostRepository extends JpaRepository<Post, Integer>{
-	
+public interface ResponseVoteRepository extends JpaRepository<ResponseVote, Integer>{
+
 }
