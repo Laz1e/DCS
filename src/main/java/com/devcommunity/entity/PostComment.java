@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -29,18 +32,23 @@ public class PostComment {
 	private Integer commentId;
 	
 	@Column(name = "comment")
+	@NotBlank(message = "comment cannot be blank")
 	private String text;
 	
 	@ManyToOne
+	@Valid
 	private Post post;
 	
 	@OneToOne
+	@Valid
 	private Developer createdBy;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@PastOrPresent(message = "date can be of present or past only")
 	private LocalDate createdDate;
 	
 	@OneToOne
+	@Valid
 	private PostVote vote;
 
 }

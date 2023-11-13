@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -36,22 +39,28 @@ public class Response {
 	private Integer respId;
 	
 	@Column(name = "answer")
+	@NotBlank(message = "answer cannot be blank")
 	private String answer;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@PastOrPresent(message = "date should be present or past only")
 	private LocalDate respDateTime;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "post_id")
+	@Valid
 	private Post post;
 	
 	@OneToOne
+	@Valid
 	private Developer developer;
 	
 	@OneToMany(mappedBy = "response")
+	@Valid
 	private List<ResponseComment> listOfComments;
 	
 	@OneToMany(mappedBy = "response")
+	@Valid
 	private List<ResponseVote> vote;
 	
 }
