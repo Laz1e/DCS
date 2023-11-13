@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","vote"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","vote","listOfComments"})
 public class ResponseDTO {
 	
 	private Integer respId;
@@ -20,7 +20,7 @@ public class ResponseDTO {
 	private LocalDateTime respDateTime;
 	private PostDTO post;
 	private DeveloperDTO developer;
-//	private List<CommentDTO> listOfComments;
+	private List<ResponseCommentDTO> listOfComments;
 	private List<ResponseVoteDTO> vote;
 
 }

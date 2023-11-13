@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","listOfResponse","vote"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","listOfResponse","vote","listOfComments"})
 public class PostDTO {
 	
 	private Integer postId;
@@ -21,7 +21,7 @@ public class PostDTO {
 	private String topic;
 	private DeveloperDTO developer;
 	private List<ResponseDTO> listOfResponse;
-//	private List<CommentDTO> listOfComment;
+	private List<PostCommentDTO> listOfComments;
 	private Integer noOfViews;
 	private List<PostVoteDTO> vote;
 

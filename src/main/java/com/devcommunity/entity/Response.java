@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "responses")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","vote"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","vote","listOfComments"})
 public class Response {
 
 	@Id
@@ -47,6 +47,9 @@ public class Response {
 	
 	@OneToOne
 	private Developer developer;
+	
+	@OneToMany(mappedBy = "response")
+	private List<ResponseComment> listOfComments;
 	
 	@OneToMany(mappedBy = "response")
 	private List<ResponseVote> vote;
